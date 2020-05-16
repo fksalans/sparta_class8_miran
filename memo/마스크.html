@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>실시간 마스크 정보</title>
+    <!-- JQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        div.question-box {
+            margin: 10px 0 20px 0;
+        }
+
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 10px;
+            border: 1px solid;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+           $('#names-q1').empty();
+        });
+        function q1() {
+            $('#namet-q1').empty();
+            $.ajax({
+                type: "GET",
+                url:"https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json",
+                data: {},
+                success: function (response) {
+                    let rows = response["stores"];
+                    for(let i = 0; i < rows.length; i++) {
+                        let pharm_name = rows[i]['name'];
+                        let pharm_address = rows[i]['addr'];
+                        let maskCnt = rows[i]['remain_stat'];
+                        let temp_html = `<tr>
+                            <td>${pharm_name}</td>
+                            <td>${pharm_address}</td>
+                            <td>${maskCnt}</td></tr>`
+
+                            if (maskCnt = "break") {
+                                temp_html=""
+                            }
+                            else {
+                                temp_html = `<tr>
+                                    <td>${pharm_name}</td>
+                                    <td>${pharm_address}</td>
+                                    <td>${maskCnt}</td></tr>`
+                            }
+
+                            $('#names-q1').append(temp_html)
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <h1>jQuery + Ajax의 조합을 연습하자!</h1>
+    <hr />
+    <div class="question-box">
+        <h2>2. 서울시 OpenAPI(실시간 마스크 현황)를 이용하기</h2>
+        <p>마스크 현황을 보여주세요</p>
+        <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
+        <button onclick="q1()">업데이트</button>
+        <table>
+            <thead>
+                <tr>
+                    <td>약국명</td>
+                    <td>약국주소</td>
+                    <td>마스크 수</td>
+                </tr>
+            </thead>
+            <tbody id="names-q1">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

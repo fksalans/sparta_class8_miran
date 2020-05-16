@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홀짝홀짝</title>
+    <script>
+        let num = 0;
+        function handleClick() {
+            num += 1;
+            console.log(num);
+            if (num % 2 == 0) {
+                alert("짝짝🙌")
+            } else { alert("홀홀✌") }
+        }
+    </script>
+</head>
+
+<body>
+    <button id="button1" onclick="handleClick()">눌러</button>
+</body>
+
+</html>
