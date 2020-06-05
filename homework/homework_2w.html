@@ -11,7 +11,6 @@
     <title>나만의 쇼핑몰</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
     <script>
@@ -26,7 +25,7 @@
         function showcurrent(){
             $.ajax({
             type: "GET",
-                URL: "https://api.manana.kr/exchange/rate.json",
+                url: "https://api.manana.kr/exchange/rate.json",
                 data: {},
                 success: function (response) {
                     let rates = response[1]["rate"]
